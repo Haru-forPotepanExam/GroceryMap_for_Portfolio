@@ -11,6 +11,15 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1><%= link_to image_tag("GroceryMap_logo2.jpg", class:"logo"), :root %></h1>
+    </header>
+    <section class="main_container">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </section>
+    <footer>
+      <h1><%= link_to image_tag("GroceryMap_logo2.jpg", class:"logo"), :root %></h1>
+    </footer>
   </body>
 </html>
