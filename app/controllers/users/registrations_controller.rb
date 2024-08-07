@@ -47,8 +47,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     if resource.pending_reconfirmation?
       flash[:notice] = '確認メールを送信しました。メールをご確認ください。'
-      profile_path
     end
+    profile_path
   end
 
   # If you have extra params to permit, append them to the sanitizer.
