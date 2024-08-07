@@ -9,5 +9,4 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'profile', to:'users/sessions#profile'
   end
-  
 end
