@@ -68,3 +68,5 @@ gem 'rails-i18n'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'google_places'
 gem 'geocoder'
+gem 'ransack'
+gem 'kaminari'

@@ -24,7 +24,7 @@ RSpec.describe "Prices::Results", type: :system do
   end
 
   it "価格情報がない場合のメッセージが表示されること" do
-    fill_in "q_product_name_or_memo_cont", with: "wrong product"
+    fill_in "q_product_name_or_memo_cont", with: "wrong"
     click_button "検索"
 
     expect(page).to have_content("価格情報は投稿されていません")

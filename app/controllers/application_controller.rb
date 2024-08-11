@@ -1,14 +1,19 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_q
 
   private
 
-  def after_sign_in_path_for(_resource)
+  def after_sign_in_path_for(resource)
     profile_path
   end
 
-  def after_sign_out_path_for(_resource)
+  def after_sign_out_path_for(resource)
     new_user_session_path
+  end
+
+  def set_q
+    @q = Price.ransack(params[:q])
   end
 
   protected
