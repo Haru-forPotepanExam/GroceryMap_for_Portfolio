@@ -6,13 +6,18 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <h1><%= link_to image_tag("GroceryMap_logo2.jpg", class:"logo"), :root %></h1>
+      <% if user_signed_in? %>
+        <%= render "shared/session" %>
+      <% else %>
+        <%= render "shared/register" %>
+      <% end %>
     </header>
     <section class="main_container">
       <%= render "shared/flash" %>
