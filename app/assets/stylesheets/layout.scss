@@ -213,3 +213,31 @@ ul {
   font-weight: bold;
   color: white;
 }
+
+// shared/search
+.search_container {
+  text-align: center;
+  margin-right: 20px;
+}
+
+.search_container form {
+  display: inline-block;
+}
+
+.search_btn {
+  background-color: #337e55;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+@media (max-width: 430px) {
+  .search_container {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 65px
+    
+  }
+}

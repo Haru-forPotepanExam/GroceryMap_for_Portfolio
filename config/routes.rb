@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'prices/index'
-  get 'products/index'
-  get 'stores/show'
   root to: 'home#index'
 
   devise_for :users, controllers: { 
@@ -13,7 +10,25 @@ Rails.application.routes.draw do
     get 'profile', to:'users/sessions#profile'
   end
 
-  resources :stores
+  resources :stores, only: [:show, :create], param: :google_place_id do
+    resources :prices, only: [:new, :create, :index]
+    resource :favorites, only: [:create, :update, :edit, :destroy]
+  end
+
+  resources :prices, only: [:edit, :destroy, :update] do
+    collection do
+      get 'own', to: 'prices#own_prices'
+      get 'own_prices_result', to: 'prices#own_result'
+    end
+  end
+
+  get 'result', to: 'prices#result'
+
+  resources :favorites, only: [] do
+    collection do
+      get 'my_stores', to: 'favorites#index'
+    end
+  end
+
   resources :products
-  resources :prices
 end
