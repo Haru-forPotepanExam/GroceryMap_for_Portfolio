@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'stores/show'
   root to: 'home#index'
 
   devise_for :users, controllers: { 
@@ -9,4 +10,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'profile', to:'users/sessions#profile'
   end
+
+  resources :stores
 end
