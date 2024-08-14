@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Prices Index", type: :system do
+RSpec.describe "Prices::Indices", type: :system do
   let(:user) { create(:user) }
   let!(:store) { create(:store) }
   let(:category) { create(:category) }

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'prices/index'
+  get 'products/index'
   get 'stores/show'
   root to: 'home#index'
 
@@ -12,4 +14,6 @@ Rails.application.routes.draw do
   end
 
   resources :stores
+  resources :products
+  resources :prices
 end
