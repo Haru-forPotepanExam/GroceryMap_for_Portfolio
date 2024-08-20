@@ -17,8 +17,12 @@
         <th class="common_th">営業時間:</th>
         <td class="common_td">
           <ul>
-            <% @store.opening_hours['weekday_text'].each do |hour| %>
-              <li><%= hour %></li>
+            <% if @store.opening_hours.present? %>
+              <% @store.opening_hours['weekday_text'].each do |hour| %>
+                <li><%= hour %></li>
+              <% end %>
+            <% else %>
+              <p>営業時間の記載はありません</p>
             <% end %>
           </ul>
         </td>
