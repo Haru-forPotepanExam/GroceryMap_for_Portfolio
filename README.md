@@ -25,31 +25,41 @@ https://grocerymap-for-portfolio-2bef59300c70.herokuapp.com/
 # 機能紹介
 ## トップページ
 トップページから食料品店の検索、価格情報の検索をすることが出来ます。
+![C76972FE-4415-4943-A296-5C40F0E3E409_1_102_o](https://github.com/user-attachments/assets/43e99c3b-a9e9-4178-a8b0-0cc45174a152)
 
 ## サインインページ
 新規登録、サインイン、ログアウトが出来ます。
+![957EDD84-D3D3-4EC3-BD44-DA5ED62A11FC_1_206_a](https://github.com/user-attachments/assets/52b2fb4d-fc22-4d76-bb56-6f255eaff1d3)
 
 ## プロフィール機能
 プロフィール情報の閲覧、編集ができます。
+<img width="1440" alt="スクリーンショット 2024-08-20 17 58 43" src="https://github.com/user-attachments/assets/97366312-352b-4432-a9a7-f536f2dd8b39">
 
 ## 食料品店検索ページ
 トップページから食料品店を検索し店舗詳細ページにアクセスすると、店舗に投稿された価格情報の一覧と店舗の情報が閲覧出来ます。
-また、投稿された価格情報の備考など詳細を確認すること、価格情報の投稿、商品の追加登録も本ページからアクセス可能です。
+また、価格情報の投稿、商品の追加登録も本ページからアクセス可能です。
+![0E546A8D-2973-464B-9363-3E4467B84E26_1_206_a](https://github.com/user-attachments/assets/d174865c-2705-4035-8f9b-0b86193d3341)
 
 ## 食料品店のお気に入り登録機能
 店舗名の横に並ぶハートマークをクリックすることで、店舗をお気に入り登録することが可能です。
+<img width="1422" alt="スクリーンショット 2024-08-20 18 02 46" src="https://github.com/user-attachments/assets/eda6d19a-1801-43b3-82cb-2eb989981856">
 
 ##　 価格情報の閲覧、投稿機能
 投稿された価格情報の備考など詳細を確認、及び価格情報の登録が出来ます。
+<img width="1440" alt="スクリーンショット 2024-08-20 18 03 45" src="https://github.com/user-attachments/assets/38acae4e-cd0a-4b1c-a16f-9f2b54e78499">
+<img width="1440" alt="スクリーンショット 2024-08-20 18 04 10" src="https://github.com/user-attachments/assets/394cc94e-1ea8-4ad1-9755-7e0f285baded">
 
 ## 食料品の登録機能
 価格情報を投稿したい商品が登録されていない場合、本ページから投稿することが出来ます。
+<img width="1440" alt="スクリーンショット 2024-08-20 18 05 14" src="https://github.com/user-attachments/assets/308011aa-9127-426c-ae0d-dfc4abd8bcb3">
 
 ## 価格情報の検索機能
 ヘッダーの検索ウィンドウから価格情報を商品名や備考からあいまい検索することが出来ます。
+![D8CAED38-9FCE-41DF-99BE-DCCD4D121C5E_1_102_o](https://github.com/user-attachments/assets/4b918798-01e8-42e9-aa71-34ce0a4c71ad)
 
 ## お気に入り店舗内での食料品検索機能
 お気に入りに登録した店舗に登録されている価格情報のみを検索することが出来ます。
+![E73302AC-6E59-478C-9426-70F54591D3C6_1_102_o](https://github.com/user-attachments/assets/a7d603cb-4cf6-4057-b7ae-a2c480bcdaa1)
 
 # 機能一覧
 サインイン機能：サインアップ・サイインイン・ログアウト
@@ -62,4 +72,7 @@ https://grocerymap-for-portfolio-2bef59300c70.herokuapp.com/
 お気に入り店舗内での食料品検索機能：お気に入りした店舗にて投稿された価格情報を検索することが出来ます。
 
 # 今後の課題
-価格情報が不足している場合に検索、比較が十分に出来ないこと
+価格情報が不足している場合に検索、比較が十分に出来ないことが機能面における一番の課題だと考え、
+別途APIを導入する等の方法を検討しています。
+また、実際に利用したユーザーより商品の分類をより細かくしてほしいという意見をいただいたため、
+商品データの重複が無いように管理しやすく、且つ詳細な商品データを提供する方法についても検討中となります。
