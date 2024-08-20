@@ -8,16 +8,16 @@ https://grocerymap-for-portfolio-2bef59300c70.herokuapp.com/
 
 # 技術
 ## 使用技術
-###　フロントエンド
-・Bootstrap: フロントエンドフレームワーク
-###　バックエンド
-・Ruby on Rails: Webアプリケーションフレームワーク  
-・PostgreSQL: データベース管理システム  
-・RSpec: テストフレームワーク  
-・Google Maps API: 地図および位置情報サービス  
-###　インフラ
-・Heroku: アプリケーションホスティングプラットフォーム  
-・GitHub: ソースコード管理およびバージョン管理サービス  
+### フロントエンド
++ Bootstrap: フロントエンドフレームワーク
+### バックエンド
++ Ruby on Rails: Webアプリケーションフレームワーク  
++ PostgreSQL: データベース管理システム  
++ RSpec: テストフレームワーク  
++ Google Maps API: 地図および位置情報サービス  
+### インフラ
++ Heroku: アプリケーションホスティングプラットフォーム  
++ GitHub: ソースコード管理およびバージョン管理サービス  
 
 ## ER図
 <img width="1049" alt="スクリーンショット 2024-08-20 18 14 38" src="https://github.com/user-attachments/assets/0ade7495-7013-4cbb-a92b-0e0aa3d5ef68">
