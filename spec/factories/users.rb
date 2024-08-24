@@ -7,5 +7,11 @@ FactoryBot.define do
     sequence(:confirmation_token) { |n| "test_Test_test_Test#{n}" }
     confirmation_sent_at { Date.today }
     confirmed_at { Date.today }
+
+    trait :guest do
+      email { 'guest@example.com' }
+      name { 'ゲスト' }
+      password { SecureRandom.urlsafe_base64 }
+    end
   end
 end
