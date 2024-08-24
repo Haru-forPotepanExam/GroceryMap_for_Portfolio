@@ -46,8 +46,8 @@ RSpec.describe Price, type: :model do
       expect(price).not_to be_valid
     end
 
-    it "weight_validityが100未満の場合エラーが発生すること" do
-      price.weight = 1
+    it "weight_validityが0の場合エラーが発生すること" do
+      price.weight = 0
       expect(price).not_to be_valid
     end
 
@@ -56,7 +56,7 @@ RSpec.describe Price, type: :model do
       expect(price).not_to be_valid
     end
 
-    it "quantity_validityが1未満の場合エラーが発生すること" do
+    it "quantity_validityが0の場合エラーが発生すること" do
       price.quantity = 0
       expect(price).not_to be_valid
     end
