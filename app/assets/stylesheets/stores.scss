@@ -99,6 +99,11 @@ table {
     width: 90%;
   }
 
+  .store-search input::placeholder {
+    font-size: 9px;
+    text-align: center;
+  }
+
   .map_container {
     height: 100%;
     margin: 0 10px;
@@ -123,6 +128,12 @@ table {
 
   #resultsTable {
     width: 100%;
+  }
+
+  #findstores {
+    font-size: 15px;
+    color: #337e55;
+    font-weight: bold;
   }
 }
 

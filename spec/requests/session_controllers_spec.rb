@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "SessionControllers", type: :request do
   let(:user) { create(:user) }
   let(:invalid_user_params) { attributes_for(:user, password: "wrongpass") }
+  let(:guest) { attributes_for(:user, :guest) }
 
   describe "POST /users/sign_in" do
     context "パラメーターが正当な場合" do
@@ -44,6 +45,25 @@ RSpec.describe "SessionControllers", type: :request do
 
     it "ログアウトできること" do
       expect(response).to redirect_to(new_user_session_path)
+    end
+  end
+
+  describe "POST /users/guest_sign_in" do
+    before do
+      post users_guest_sign_in_path, params: { user: guest }
+    end
+
+    it "リクエストが成功すること" do
+      expect(response).to have_http_status(302)
+    end
+
+    it "ルートにリダイレクトすること" do
+      expect(response).to redirect_to(root_path)
+    end
+
+    it "メッセージが表示されること" do
+      follow_redirect!
+      expect(response.body).to include("ゲストユーザーとしてログインしました。")
     end
   end
 end

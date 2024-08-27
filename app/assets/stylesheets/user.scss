@@ -60,6 +60,10 @@
   display: none;
 }
 
+.signin_link a {
+  text-decoration: none;
+}
+
 @media (max-width: 430px) {
   .profile_container {
     margin: 10px 10px;
@@ -85,5 +89,9 @@
   .info-text_for_media {
     font-size: small;
     display: block;
+  }
+
+  .signin_link {
+    font-size: 10px;
   }
 }

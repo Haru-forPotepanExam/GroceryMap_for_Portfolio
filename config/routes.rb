@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   
   devise_scope :user do
     get 'profile', to:'users/sessions#profile'
+    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
   resources :stores, only: [:show, :create], param: :google_place_id do

@@ -37,7 +37,7 @@ class Price < ApplicationRecord
 
   def weight_validity
     if weight.present?
-      if !weight.is_a?(Integer) || weight <= 99
+      if !weight.is_a?(Integer) || weight <= 0
         errors.add(:weight, "は100グラム以上、かつグラム単位で入力してください。")
       end
     end
