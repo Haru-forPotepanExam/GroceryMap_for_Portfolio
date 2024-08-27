@@ -58,4 +58,12 @@ class Price < ApplicationRecord
   def self.ransackable_associations(options = {})
     %w(product)
   end
+
+  def lowest_price
+    place_id = params[:place_id]
+    prices = Price.where(google_place_id: place_id)
+    lowest_price = prices.minimum(:price)
+
+    render json: { lowest_price: lowest_price }
+  end
 end

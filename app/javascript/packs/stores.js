@@ -24,11 +24,44 @@ function initMap() {
     {
       componentRestrictions: { country: "jp" },
       fields: ["place_id", "geometry", "name"],
-      types: ['supermarket', 'subway_station', 'train_station'],
+      types: ['supermarket', 'subway_station', 'train_station', 'bus_station'],
     },
   );
   places = new google.maps.places.PlacesService(map);
   autocomplete.addListener("place_changed", onPlaceChanged);
+
+  document.getElementById('current-location-btn').addEventListener('click', getCurrentLocation);
+}
+
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        map.setCenter(pos);
+        map.setZoom(15);
+        search();
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "エラー：位置情報の取得に失敗しました。"
+      : "エラー：ブラウザが位置情報の取得に対応していません。"
+  );
+  infoWindow.open(map);
 }
 
 function onPlaceChanged() {
@@ -46,7 +79,7 @@ function onPlaceChanged() {
 function search() {
   const search = {
     bounds: map.getBounds(),
-    types: ["grocery_store", 'supermarket'], 
+    types: ["grocery_store", 'supermarket', "Fruit and vegetable store", "Fish store", "Butcher shop"], 
     keyword: ["grocery", "supermarket"],
   };
 

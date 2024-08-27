@@ -1,4 +1,17 @@
 class StoresController < ApplicationController
+  def index
+    keyword = params[:keyword]
+    lat = params[:lat].to_f
+    lng = params[:lng].to_f
+
+    stores = Store.where(google_place_id: Price.pluck(:google_place_id))
+    place_ids = stores.pluck(:google_place_id)
+
+    results = Store.near([lat, lng], 2).where(google_place_id: place_ids)
+
+    render json: { valid_place_ids: results.pluck(:google_place_id) }
+  end
+
   def show
     @store = Client.spot(params[:google_place_id], language: 'ja')
     @google_place_id = @store.place_id
