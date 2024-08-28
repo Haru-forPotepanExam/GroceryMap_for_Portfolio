@@ -2,12 +2,12 @@ class PricesController < ApplicationController
   def index
     @product = Product.find(params[:product_id])
     @product_prices = Price.where(product_id: @product.id).where(google_place_id: params[:store_google_place_id])
-    @store = Client.spot(params[:store_google_place_id], language: 'ja')
+    @place = Client.spot(params[:store_google_place_id], language: 'ja')
   end
 
   def new
     @product = Product.find(params[:product_id])
-    @store = Client.spot(params[:store_google_place_id], language: 'ja')
+    @place = Client.spot(params[:store_google_place_id], language: 'ja')
     @user = current_user
     @price = Price.new
     @google_place_id = params[:store_google_place_id]
@@ -24,6 +24,8 @@ class PricesController < ApplicationController
 
     @store.name = @store_data.name
     @store.address = @store_data.formatted_address
+    @store.latitude = @store_data["geometry"]["location"]["lat"]
+    @store.longitude = @store_data["geometry"]["location"]["lng"]
 
     if @store.save
       @price = @store.prices.new(price_params)

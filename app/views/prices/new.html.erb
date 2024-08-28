@@ -1,6 +1,6 @@
 <div class="table_container">
   <div class="form_main_container">
-    <p class="other_style"><span class="title_style"><%= @store.name %></span> の 
+    <p class="other_style"><span class="title_style"><%= @place.name %></span> の 
     <span class="title_style"><%= @product.name %></span> の価格情報を投稿する</p>
 
     <%= render "shared/error", obj: @price %>
@@ -9,7 +9,7 @@
       <%= form_with(model: @price, url: store_prices_path(store_google_place_id: @google_place_id), local: true) do |f| %>
         <%= f.hidden_field :user_id, value: @user.id %>
         <%= f.hidden_field :google_place_id, value: @google_place_id %>
-        <%= f.hidden_field :store_name, value: @store.name %>
+        <%= f.hidden_field :store_name, value: @place.name %>
         <%= f.hidden_field :product_id, value: @product.id %>
 
         <div class="field">

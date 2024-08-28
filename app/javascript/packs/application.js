@@ -10,6 +10,7 @@ import "channels"
 import "bootstrap";
 import "../stylesheets/application.scss";
 import "../packs/stores.js"
+import "../packs/evaluations.js"
 import "jquery"
 
 Rails.start()

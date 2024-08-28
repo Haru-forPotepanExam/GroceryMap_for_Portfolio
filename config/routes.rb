@@ -11,9 +11,10 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
 
-  resources :stores, only: [:index, :show, :create], param: :google_place_id do
+  resources :stores, only: [:show, :create], param: :google_place_id do
     resources :prices, only: [:new, :create, :index]
-    resource :favorites, only: [:create, :update, :edit, :destroy]
+    resource :favorites, only: [:create, :destroy]
+    resource :evaluations, only: [:create, :destroy]
   end
 
   resources :prices, only: [:edit, :destroy, :update] do
