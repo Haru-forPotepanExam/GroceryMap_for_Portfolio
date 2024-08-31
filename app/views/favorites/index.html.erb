@@ -18,7 +18,7 @@
       </thead>
         <% @favorites.each_with_index do |fav, index| %>
           <tr>
-            <% store = @stores[index] %>
+            <% store = @places[index] %>
             <td class="common_td"><%= link_to store.name, store_path(fav.google_place_id) %></td>
             <td class="common_td"><%= store.formatted_address %></td>
             <% if fav.store.prices.present? %>

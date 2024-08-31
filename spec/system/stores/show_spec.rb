@@ -7,6 +7,9 @@ RSpec.describe "Stores::Shows", type: :system do
     OpenStruct.new(place_id: store.google_place_id, name: store.name, formatted_address: "123 Tokyo St",
                    opening_hours: { 'weekday_text' => ["Monday: 9:00 AM – 9:00 PM"] })
   end
+  let!(:evaluation) { create(:evaluation, store: store, price_range: "安価", price_score: 1) }
+  let!(:evaluation2) { create(:evaluation, store: store, price_range: "やや安価", price_score: 2) }
+  let!(:evaluation3) { create(:evaluation, store: store, price_range: "平均", price_score: 3) }
 
   before do
     sign_in user
@@ -27,5 +30,18 @@ RSpec.describe "Stores::Shows", type: :system do
 
   it "パーシャルが正常に表示されていること" do
     expect(page).to have_css(".product_container")
+  end
+
+  it "平均評価が表示されること" do
+    within(".average_evaluation") do
+      expect(page).to have_content("平均")
+    end
+  end
+
+  it "評価ができること" do
+    within(".evaluate_btn") do
+      click_button "安価"
+      expect(page).to have_css(".evaluated")
+    end
   end
 end

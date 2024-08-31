@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
+  post 'home/index', to: 'home#index'
 
   devise_for :users, controllers: { 
     registrations: 'users/registrations', 
@@ -13,7 +14,8 @@ Rails.application.routes.draw do
 
   resources :stores, only: [:show, :create], param: :google_place_id do
     resources :prices, only: [:new, :create, :index]
-    resource :favorites, only: [:create, :update, :edit, :destroy]
+    resource :favorites, only: [:create, :destroy]
+    resource :evaluations, only: [:create, :destroy]
   end
 
   resources :prices, only: [:edit, :destroy, :update] do

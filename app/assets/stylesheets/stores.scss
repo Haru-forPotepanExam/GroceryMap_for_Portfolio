@@ -93,14 +93,26 @@ table {
   text-align: right;
 }
 
+#info-content table {
+  border:none
+}
+
+#current-location-btn {
+  background-color: #689931;
+  border: 5px solid #689931;
+  border-radius: 9999px;
+  color: white;
+  padding: 3px 5px;
+}
 
 @media (max-width: 430px) {
   .store-search {
-    width: 90%;
+    width: 100%;
+    margin: 0 5px;
   }
 
   .store-search input::placeholder {
-    font-size: 9px;
+    font-size: 10px;
     text-align: center;
   }
 
@@ -134,6 +146,21 @@ table {
     font-size: 15px;
     color: #337e55;
     font-weight: bold;
+    width: 110px;
+  }
+
+  #locationField {
+    margin: 0 5px;
+  }
+
+  #current-location-btn {
+    font-size: 15px;
+    padding: 1px 3px;
+    width: 150px;
+  }
+  #autocomplete {
+    height: 25px;
+    width: 95%;
   }
 }
 
@@ -152,4 +179,19 @@ table {
   margin-top: 10px;
   display: flex;
   justify-content: center;
+}
+
+.evaluation_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.average_evaluation {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: large;
+  color: #337e55;
 }

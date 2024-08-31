@@ -1,0 +1,26 @@
+// Place all the styles related to the evaluations controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+.evaluated {
+  background-color: #3b5b2e;
+  border: 5px solid #3b5b2e;
+  border-radius: 15%;
+  font-size: large;
+  color: white;
+  margin: 5px;
+}
+
+.evaluate {
+  background-color: #689931;
+  border: 5px solid #689931;
+  border-radius: 15%;
+  font-size: large;
+  color: white;
+  margin: 5px;
+}
+
+.evaluate_btn {
+  display: flex;
+  justify-content: space-between;
+}
