@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'home#index'
+  post 'home/index', to: 'home#index'
 
   devise_for :users, controllers: { 
     registrations: 'users/registrations', 

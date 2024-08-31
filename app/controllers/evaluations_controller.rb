@@ -1,7 +1,4 @@
 class EvaluationsController < ApplicationController
-  def index
-  end
-
   def create
     @google_place_id = params[:store_google_place_id]
     @store_data = Client.spot(@google_place_id, language: 'ja')

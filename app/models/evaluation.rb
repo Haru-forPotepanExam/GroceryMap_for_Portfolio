@@ -23,15 +23,16 @@ class Evaluation < ApplicationRecord
     end
   end
 
-  def self.average_evaluation(store_google_place_id)
-    evaluations = where(google_place_id: store_google_place_id)
+  def self.average_evaluation(google_place_id)
+    evaluations = Evaluation.where(google_place_id: google_place_id)
     return 0 if evaluations.empty?
 
-    evaluations.average(:price_score).round
+    average_score = evaluations.average(:price_score)
+    average_score ? average_score.round : 0
   end
 
-  def self.average_evaluation_label(store_google_place_id)
-    average_score = average_evaluation(store_google_place_id)
+  def self.average_evaluation_label(google_place_id)
+    average_score = Evaluation.average_evaluation(google_place_id)
 
     if average_score.between?(1, PRICE_VALUE.length)
       PRICE_VALUE[average_score - 1]
