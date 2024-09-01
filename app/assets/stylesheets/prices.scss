@@ -1,3 +1,35 @@
 // Place all the styles related to the prices controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.sort-link {
+  text-decoration: none;
+  color: #337e55;
+}
+
+.search_favorite {
+  text-align: center;
+  margin-right: 20px;
+}
+
+.search_favorite form {
+  display: inline-block;
+}
+
+.favorite_search_btn {
+  background-color: #3b5b2e;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+@media (max-width: 430px) {
+  .search_favorite {
+    margin: 10px 10px;
+  }
+
+  .favorite_search_container {
+    margin-top: 5px;
+  }
+}

@@ -1,11 +1,6 @@
 <div class="table_container">
   <h3>お気に入り店舗一覧</h3>
-
-  <div class="search_favorite">
-    <p>お気に入り店舗から検索</p>
-    <%= render 'shared/search', q: @own_q, url: own_prices_result_prices_path %>
-  </div>
-
+  <%= render 'shared/favorite_search' %>
     <table class="fav_items">
       <tbody>
         <thead>

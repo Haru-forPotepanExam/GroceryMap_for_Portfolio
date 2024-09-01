@@ -19,13 +19,14 @@ class PricesController < ApplicationController
     @price = Price.new(price_params)
     @google_place_id = params[:store_google_place_id]
 
-    @store_data = Client.spot(price_params[:google_place_id], language: 'ja')
-    @store = Store.find_or_initialize_by(google_place_id: price_params[:google_place_id])
-
-    @store.name = @store_data.name
-    @store.address = @store_data.formatted_address
-    @store.latitude = @store_data["geometry"]["location"]["lat"]
-    @store.longitude = @store_data["geometry"]["location"]["lng"]
+    @store_data = Client.spot(@google_place_id, language: 'ja')
+    @store = Store.find_or_initialize_by(google_place_id: @google_place_id)
+    @store.assign_attributes(
+      name: @store_data.name,
+      address: @store_data.formatted_address,
+      latitude: @store_data.lat,
+      longitude: @store_data.lng
+    )
 
     if @store.save
       @price = @store.prices.new(price_params)
@@ -73,18 +74,73 @@ class PricesController < ApplicationController
   end
 
   def result
-    @prices = @q.result.page(params[:page]).order(created_at: :DESC)
+    @prices = @q.result.includes(:store)
+
+    case params[:sort]
+    when 'gram'
+      @prices = @prices.sort_by { |price| price.prices_per_gram || Float::INFINITY }
+    when 'quantity'
+      @prices = @prices.sort_by { |price| price.prices_per_quantity || Float::INFINITY }
+    when 'distance'
+      if params[:lat].present? && params[:lng].present?
+        user_lat = params[:lat].to_f
+        user_lng = params[:lng].to_f
+
+        @prices = @prices.sort_by do |price|
+          store = price.store
+          distance(user_lat, user_lng, store.latitude, store.longitude)
+        end
+      end
+    end
+    render :result
   end
 
   def own_result
     google_place_ids = current_user.favorites.pluck(:google_place_id)
     @own_q = Price.where(google_place_id: google_place_ids).ransack(params[:q])
     @prices = @own_q.result.includes(:store, :product).order(created_at: :desc).page(params[:page])
+
+    case params[:sort]
+    when 'gram'
+      @prices = @prices.sort_by { |price| price.prices_per_gram || Float::INFINITY }
+    when 'quantity'
+      @prices = @prices.sort_by { |price| price.prices_per_quantity || Float::INFINITY }
+    when 'distance'
+      if params[:lat].present? && params[:lng].present?
+        user_lat = params[:lat].to_f
+        user_lng = params[:lng].to_f
+
+        @prices = @prices.sort_by do |price|
+          store = price.store
+          distance(user_lat, user_lng, store.latitude, store.longitude)
+        end
+      end
+    end
+    render :own_result
   end
 
   private
 
   def price_params
     params.require(:price).permit(:price_value, :quantity, :weight, :product_id, :user_id, :google_place_id, :store_name, :memo)
+  end
+
+  def distance(lat1, lng1, lat2, lng2)
+    x1 = lat1.to_f * Math::PI / 180
+    y1 = lng1.to_f * Math::PI / 180
+    x2 = lat2.to_f * Math::PI / 180
+    y2 = lng2.to_f * Math::PI / 180
+
+    radius = 6378.137
+    diff_y = (y1 - y2).abs
+
+    calc1 = Math.cos(x2) * Math.sin(diff_y)
+    calc2 = Math.cos(x1) * Math.sin(x2) - Math.sin(x1) * Math.cos(x2) * Math.cos(diff_y)
+
+    numerator = Math.sqrt(calc1**2 + calc2**2)
+    denominator = Math.sin(x1) * Math.sin(x2) + Math.cos(x1) * Math.cos(x2) * Math.cos(diff_y)
+
+    degree = Math.atan2(numerator, denominator)
+    degree * radius
   end
 end

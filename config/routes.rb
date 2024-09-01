@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root to: 'home#index'
   post 'home/index', to: 'home#index'
+  post 'result', to: 'prices#result'
 
   devise_for :users, controllers: { 
     registrations: 'users/registrations', 
@@ -34,4 +35,5 @@ Rails.application.routes.draw do
   end
 
   resources :products
+  post '/update_location', to: 'application#update_location'
 end

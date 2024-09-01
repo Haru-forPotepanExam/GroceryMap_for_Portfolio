@@ -5,7 +5,7 @@
   </div>
   <div class="evaluation_container">
     <%= render "evaluations/evaluation_btn", store: @store %>
-    <span class="average_evaluation">平均評価：<%= Evaluation.average_evaluation_label(@google_place_id) %></span>
+    <span class="average_evaluation">平均評価：<%=  @store_average_evaluation %></span>
   </div>
   <div class="store_info">
     <table>

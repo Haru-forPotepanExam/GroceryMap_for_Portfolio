@@ -1,19 +1,20 @@
 <div class="evaluate_btn">
   <% if user_signed_in? %>  
-    <% Evaluation::PRICE_VALUE.each do |price_range| %>
-      <% is_evaluated = @current_evaluation && @current_evaluation.price_range == price_range %>
-      <% button_class = is_evaluated ? "evaluated" : "evaluate" %>
-      
-      <% if is_evaluated %>
-        <%= button_to price_range, store_evaluations_path(store), method: :delete, local: true, class: button_class %>
-      <% else %>
-        <%= button_to price_range, store_evaluations_path(store), params: { price_range: price_range, user_id: current_user.id, google_place_id: store.google_place_id }, method: :post, local: true, class: button_class %>
+    <% if store.evaluations.present? %>
+      <% Evaluation::PRICE_VALUE.each do |price_range| %>
+        <% is_evaluated = @current_evaluation && @current_evaluation.price_range == price_range %>
+        <% button_class = is_evaluated ? "evaluated" : "evaluate" %>
+        
+        <% if is_evaluated %>
+          <%= button_to price_range, store_evaluations_path(store), method: :delete, local: true, class: button_class %>
+        <% else %>
+          <%= button_to price_range, store_evaluations_path(store), params: { price_range: price_range, user_id: current_user.id, google_place_id: store.google_place_id }, method: :post, local: true, class: button_class %>
+        <% end %>
       <% end %>
-    <% end %>
-    
-  <% else %>
-    <% Evaluation::PRICE_VALUE.each do |price_range| %>
-      <%= button_to price_range, store_evaluations_path(store), params: { price_range: price_range, user_id: current_user.id, google_place_id: store.google_place_id }, method: :post, local: true, class: "evaluate" %>
+    <% else %>
+      <% Evaluation::PRICE_VALUE.each do |price_range| %>
+        <%= button_to price_range, store_evaluations_path(store), params: { price_range: price_range, user_id: current_user.id, google_place_id: store.google_place_id }, method: :post, local: true, class: "evaluate" %>
+      <% end %>
     <% end %>
   <% end %>
 </div>
