@@ -1,9 +1,17 @@
 class StoresController < ApplicationController
   def show
-    @store = Client.spot(params[:google_place_id], language: 'ja')
-    @google_place_id = @store.place_id
-    @store_name = @store.name
-    @fav_store = Store.find_or_initialize_by(google_place_id: params[:google_place_id])
+    @place = Client.spot(params[:google_place_id], language: 'ja')
+    @google_place_id = @place.place_id
+    @store_name = @place.name
+    @store = Store.find_or_initialize_by(google_place_id: params[:google_place_id])
+
+    @current_evaluation = current_user.evaluations.find_by(google_place_id: @store.google_place_id)
+
+    if @store.evaluations.present?
+      @store_average_evaluation = Evaluation.average_evaluation_label(@google_place_id)
+    else
+      @store_average_evaluation = "評価なし"
+    end
 
     @category1 = Product.where(category_id: 1)
     @category2 = Product.where(category_id: 2)

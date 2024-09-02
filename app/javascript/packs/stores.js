@@ -24,11 +24,44 @@ function initMap() {
     {
       componentRestrictions: { country: "jp" },
       fields: ["place_id", "geometry", "name"],
-      types: ['supermarket', 'subway_station', 'train_station'],
+      types: ['supermarket', 'subway_station', 'train_station', 'bus_station'],
     },
   );
   places = new google.maps.places.PlacesService(map);
   autocomplete.addListener("place_changed", onPlaceChanged);
+
+  document.getElementById('current-location-btn').addEventListener('click', getCurrentLocation);
+}
+
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        map.setCenter(pos);
+        map.setZoom(15);
+        search();
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+}
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "エラー：位置情報の取得に失敗しました。"
+      : "エラー：ブラウザが位置情報の取得に対応していません。"
+  );
+  infoWindow.open(map);
 }
 
 function onPlaceChanged() {
@@ -39,14 +72,14 @@ function onPlaceChanged() {
     map.setZoom(15);
     search();
   } else {
-    document.getElementById("autocomplete").placeholder = "店名、または最寄りの駅名を入力してください";
+    document.getElementById("autocomplete").placeholder = "例）東京駅　XXスーパー";
   }
 }
 
 function search() {
   const search = {
     bounds: map.getBounds(),
-    types: ["grocery_store", 'supermarket'], 
+    types: ["grocery_store", 'supermarket', "Fruit and vegetable store", "Fish store", "Butcher shop"], 
     keyword: ["grocery", "supermarket"],
   };
 
@@ -128,6 +161,12 @@ function clearResults() {
 
 function showInfoWindow() {
   const marker = this;
+  const placeId = marker.placeResult.place_id;
+
+  const evaluationElement = document.getElementById('iw-evaluation');
+  if (evaluationElement) {
+    evaluationElement.textContent = '評価無し';
+  }
 
   places.getDetails(
     { placeId: marker.placeResult.place_id },
@@ -138,8 +177,44 @@ function showInfoWindow() {
 
       infoWindow.open(map, marker);
       buildIWContent(place);
+
+      fetch('/home/index', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({ place_id: placeId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (evaluationElement) {
+          evaluationElement.textContent = data.evaluation;
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     },
   );
+}
+
+function sendPlaceId(placeId) {
+  fetch('/home/index', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+    },
+    body: JSON.stringify({ place_id: placeId })
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
 
 function buildIWContent(place) {

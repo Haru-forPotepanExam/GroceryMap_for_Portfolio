@@ -2,7 +2,10 @@
   <h1><%= link_to image_tag("GroceryMap_logo2.jpg", class:"logo"), :root %></h1>
 
   <div class="header_content">
-    <div>
+    <%= render 'shared/search', q: @q, url: result_path %>
+    <div class="signin_link">
+      <span><%= link_to 'ゲストログイン', users_guest_sign_in_path, method: :post %></span>
+      <span>/</span>
       <span><%= link_to "ログイン", :new_user_session, class: "register_btn" %></span>
       <span>/</span>
       <span><%= link_to "新規登録", :new_user_registration, class: "register_btn" %></span>

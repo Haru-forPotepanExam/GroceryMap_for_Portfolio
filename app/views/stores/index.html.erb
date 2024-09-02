@@ -1,10 +1,11 @@
 <div class="store_container">
   <div class="store-search">
-    <div id="findstores">ストアを検索:</div>
+    <div id="findstores">店舗を検索:</div>
 
     <div id="locationField">
-      <input id="autocomplete" placeholder="店名、または最寄りの駅名を入力してください" type="text" />
+      <input id="autocomplete" placeholder="例）東京駅　XXスーパー" type="text" />
     </div>
+    <button id="current-location-btn">現在地を取得</button>
   </div>
 
   <div class="map_container">
@@ -31,6 +32,10 @@
         <tr id="iw-phone-row" class="iw_table_row">
           <td class="iw_attribute_name">電話番号：</td>
           <td id="iw-phone"></td>
+        </tr>
+        <tr>
+          <td class="iw_attribute_name">平均評価：</td>
+          <td id="iw-evaluation">評価無し</td>
         </tr>
       </table>
     </div>

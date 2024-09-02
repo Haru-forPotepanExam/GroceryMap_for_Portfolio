@@ -1,0 +1,6 @@
+<div class="search_favorite">
+  <%= search_form_for @q, url: own_prices_result_prices_path do |f| %>
+    <%= f.search_field :product_name_or_memo_cont, placeholder: 'お気に入りから検索' %>
+    <%= f.submit '検索', class:"favorite_search_btn" %>
+  <% end %>
+</div>

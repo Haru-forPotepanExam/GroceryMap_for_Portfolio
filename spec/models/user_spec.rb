@@ -28,4 +28,10 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'guest' do
+    it "ゲストユーザーが作成されること" do
+      expect { User.guest }.to change { User.count }.by(1)
+    end
+  end
 end

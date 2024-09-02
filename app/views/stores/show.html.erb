@@ -1,24 +1,32 @@
 <div class="table_container">
   <div class="favorite_container">
-    <h1><%= @store.name %></h1>
-    <span class="fav_btn"><%= render "favorites/btn", store: @fav_store %></span>
+    <h1><%= @place.name %></h1>
+    <span class="fav_btn"><%= render "favorites/btn", store: @store %></span>
+  </div>
+  <div class="evaluation_container">
+    <%= render "evaluations/evaluation_btn", store: @store %>
+    <span class="average_evaluation">平均評価：<%=  @store_average_evaluation %></span>
   </div>
   <div class="store_info">
     <table>
       <tr>
         <th class="common_th">住所：</th>
-        <td class="common_td"><%= @store.formatted_address %></td>
+        <td class="common_td"><%= @place.formatted_address %></td>
       </tr>
       <tr>
         <th class="common_th">電話番号：</th>
-        <td class="common_td"><%= @store.formatted_phone_number %></td>
+        <td class="common_td"><%= @place.formatted_phone_number %></td>
       </tr>
       <tr>
         <th class="common_th">営業時間:</th>
         <td class="common_td">
           <ul>
-            <% @store.opening_hours['weekday_text'].each do |hour| %>
-              <li><%= hour %></li>
+            <% if @place.opening_hours.present? %>
+              <% @place.opening_hours['weekday_text'].each do |hour| %>
+                <li><%= hour %></li>
+              <% end %>
+            <% else %>
+              <p>営業時間の記載はありません</p>
             <% end %>
           </ul>
         </td>

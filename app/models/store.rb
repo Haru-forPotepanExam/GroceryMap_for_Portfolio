@@ -3,6 +3,8 @@ class Store < ApplicationRecord
 
   has_many :prices, foreign_key: 'google_place_id', primary_key: 'google_place_id'
   has_many :favorites, dependent: :destroy, foreign_key: 'google_place_id', primary_key: 'google_place_id'
+  has_many :evaluations, dependent: :destroy, foreign_key: 'google_place_id', primary_key: 'google_place_id'
+  has_many :users, through: :evaluations, foreign_key: 'google_place_id', primary_key: 'google_place_id'
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
