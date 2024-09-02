@@ -2,10 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "Prices", type: :request do
   let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
   let(:category) { create(:category) }
   let(:product) { create(:product, category_id: category.id) }
   let(:store) { create(:store) }
+  let(:other_store) { create(:store, google_place_id: "other_store_id") }
+  let!(:favorite) { create(:favorite, google_place_id: store.google_place_id, user_id: user.id) }
   let!(:price) { create(:price, product_id: product.id, google_place_id: store.google_place_id, user_id: user.id) }
+  let!(:price2) do
+    create(:price, price_value: 300, product_id: product.id, google_place_id: other_store.google_place_id, user_id: other_user.id)
+  end
   let(:valid_price_attributes) do
     attributes_for(:price, product_id: product.id, user_id: user.id, google_place_id: store.google_place_id)
   end
@@ -150,6 +156,10 @@ RSpec.describe "Prices", type: :request do
     it "現在ログインしているユーザーの関連の商品価格情報のみが取得できること" do
       expect(response.body).to include(price.price_value.to_s)
     end
+
+    it "現在ログインしているユーザーの関連の商品価格情報以外が表示されないこと" do
+      expect(response.body).not_to include(price2.price_value.to_s)
+    end
   end
 
   describe "GET /result" do
@@ -173,6 +183,10 @@ RSpec.describe "Prices", type: :request do
 
     it "お気に入りした店舗に関連する価格情報にて検索結果が表示できること" do
       expect(response.body).to include(price.price_value.to_s)
+    end
+
+    it "お気に入りしていない店舗に関連する価格情報が表示されないこと" do
+      expect(response.body).not_to include(price2.price_value.to_s)
     end
   end
 end

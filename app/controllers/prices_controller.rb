@@ -19,13 +19,13 @@ class PricesController < ApplicationController
     @price = Price.new(price_params)
     @google_place_id = params[:store_google_place_id]
 
-    @store_data = Client.spot(@google_place_id, language: 'ja')
+    @place = Client.spot(params[:store_google_place_id], language: 'ja')
     @store = Store.find_or_initialize_by(google_place_id: @google_place_id)
     @store.assign_attributes(
-      name: @store_data.name,
-      address: @store_data.formatted_address,
-      latitude: @store_data.lat,
-      longitude: @store_data.lng
+      name: @place.name,
+      address: @place.formatted_address,
+      latitude: @place.lat,
+      longitude: @place.lng
     )
 
     if @store.save
