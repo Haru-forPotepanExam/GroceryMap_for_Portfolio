@@ -12,6 +12,7 @@ import "../stylesheets/application.scss";
 import "../packs/stores.js"
 import "../packs/result.js"
 import "../packs/own_result.js"
+import "../packs/products.js"
 import "jquery"
 
 Rails.start()

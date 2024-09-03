@@ -13,13 +13,15 @@ class StoresController < ApplicationController
       @store_average_evaluation = "評価なし"
     end
 
-    @category1 = Product.where(category_id: 1)
-    @category2 = Product.where(category_id: 2)
-    @category3 = Product.where(category_id: 3)
-    @category4 = Product.where(category_id: 4)
-    @category5 = Product.where(category_id: 5)
-    @category6 = Product.where(category_id: 6)
-    @category7 = Product.where(category_id: 7)
-    @category8 = Product.where(category_id: 8)
+    @categories = {
+      '野菜' => Product.where(category_id: 1),
+      '穀物' => Product.where(category_id: 2),
+      '水産物' => Product.where(category_id: 3),
+      '肉' => Product.where(category_id: 4),
+      '卵・乳製品・大豆製品' => Product.where(category_id: 5),
+      '果物' => Product.where(category_id: 6),
+      '粉類' => Product.where(category_id: 7),
+      'その他' => Product.where(category_id: 8),
+    }
   end
 end

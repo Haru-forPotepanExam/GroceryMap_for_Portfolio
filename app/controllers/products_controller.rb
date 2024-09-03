@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
-    @place = Client.spot(params[:google_place_id], language: 'ja')
-    @google_place_id = @place.place_id
+    @q = Product.ransack(params[:q])
+    @results = @q.result
   end
 
   def new

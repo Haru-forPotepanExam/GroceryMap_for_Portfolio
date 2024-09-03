@@ -20,3 +20,30 @@
 .product_container {
   margin-top: 20px;
 }
+
+.highlight {
+  background-color: #f3c517;
+}
+
+.category_product_search_container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 5px 20px;
+}
+
+.create_product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#product-search-button {
+  background-color: #f3c517;
+  border: 2px solid white;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  padding: 2 10px;
+}
