@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @q = Product.ransack(params[:q])
-    @results = @q.result
+    @store = Store.find_by(google_place_id: params[:google_place_id])
   end
 
   def new

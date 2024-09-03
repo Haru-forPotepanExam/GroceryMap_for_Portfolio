@@ -12,11 +12,11 @@ RSpec.describe "Home", type: :system do
   end
 
   it "renderにて呼び出した画面が表示されていること" do
-    expect(page).to have_content("ストアを検索")
+    expect(page).to have_content("店舗を検索")
   end
 
   it "検索バーが表示されること" do
-    expect(page).to have_field("autocomplete", placeholder: "店名、または最寄りの駅名を入力してください")
+    expect(page).to have_field("autocomplete", placeholder: "例）東京駅　XXスーパー")
     expect(page).to have_css("#map")
   end
 end

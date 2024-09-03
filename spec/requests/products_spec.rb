@@ -18,7 +18,7 @@ RSpec.describe "Products", type: :request do
         post products_path, params: { product: valid_attributes, store_google_place_id: store.google_place_id }
         allow(Client).to receive(:spot).and_return(
           OpenStruct.new(
-            placeid: store.google_place_id,
+            place_id: store.google_place_id,
             name: "store",
             formatted_address: "123 Tokyo St",
             opening_hours: { 'weekday_text' => ["Monday: 9:00 AM – 9:00 PM"] }

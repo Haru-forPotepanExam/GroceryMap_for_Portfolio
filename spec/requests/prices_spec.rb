@@ -23,7 +23,7 @@ RSpec.describe "Prices", type: :request do
 
   before do
     allow(Client).to receive(:spot).and_return(OpenStruct.new(name: store.name, formatted_address: "Test Address",
-                                                              placeid: store.google_place_id))
+                                                              place_id: store.google_place_id))
     sign_in user
   end
 

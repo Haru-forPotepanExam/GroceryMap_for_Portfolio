@@ -1,6 +1,6 @@
 <div class="table_container">
   <div class="favorite_container">
-    <h1><%= @place.name %></h1>
+    <h1><%= link_to @place.name, store_path(google_place_id: @place.place_id), class: "sort-link" %></h1>
     <span class="fav_btn"><%= render "favorites/btn", store: @store %></span>
   </div>
   <div class="evaluation_container">

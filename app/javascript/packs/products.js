@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (searchQuery) {
     const lowerCaseQuery = searchQuery.toLowerCase();
 
-    const products = document.querySelectorAll('.each_item');
+    const products = document.querySelectorAll('.product_each_item');
     let found = false;
 
     products.forEach(product => {

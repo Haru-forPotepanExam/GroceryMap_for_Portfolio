@@ -22,6 +22,6 @@ class StoresController < ApplicationController
       '果物' => Product.where(category_id: 6),
       '粉類' => Product.where(category_id: 7),
       'その他' => Product.where(category_id: 8),
-    }
+    }.compact
   end
 end

@@ -1,5 +1,5 @@
 <div class="table_container">
-  <p class="table_other_style"><span class="table_title_style"><%= @place.name %></span> の 
+  <p class="table_other_style"><span class="table_title_style"><%= link_to @place.name, store_path(google_place_id: @place.place_id), class: "sort-link" %></span> の 
   <span class="table_title_style"><%= @product.name %></span> の価格一覧</p>
 
   <% if @product_prices.present? %>

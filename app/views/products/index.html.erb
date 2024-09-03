@@ -1,6 +1,4 @@
 <div class="product_cntainer">
-  <%# <h2 id="product_top">商品一覧</h2> %>
-
   <div class="category_product_search_container">
     <div class="category_navigation">
       <a href="#category1", id="category">野菜</a>
@@ -15,7 +13,7 @@
       <%= link_to "商品を追加する", new_product_path(store_google_place_id: @google_place_id), id:"category", class:"create_product" %>
     </div>
     <div class="product_search_container">
-      <%= form_tag(store_path(@google_place_id), method: :get, id: 'product-search-form') do %>
+      <%= form_tag(store_path(@store.google_place_id), method: :get, id: 'product-search-form') do %>
         <%= text_field_tag :search, params[:search], placeholder: '商品名を検索', id: 'product-search-box' %>
         <%= submit_tag '検索', id: 'product-search-button' %>
       <% end %>
@@ -38,15 +36,15 @@
           </thead>
           <tbody>
             <% products.each do |product| %>
-            <tr class="each_item" id="product-<%= product.id %>">
+            <tr class="product_each_item" id="product-<%= product.id %>">
               <td class="common_td"><%= product.name %></td>
               <% if product.prices.present? %>
                 <td class="common_td"><%= product.prices.min_price.price_value %></td>
               <% else %>
                 <td class="common_td">価格情報なし</td>
               <% end %>
-              <td class="common_td"><%= link_to "商品価格を確認する", store_prices_path(store_google_place_id: @google_place_id, product_id: product.id) %></td>
-              <td class="common_td"><%= link_to "商品価格を投稿する", new_store_price_path(store_google_place_id: @google_place_id, product_id: product.id) %></td>
+              <td class="common_td"><%= link_to "商品価格を確認する", store_prices_path(store_google_place_id: @store.google_place_id, product_id: product.id) %></td>
+              <td class="common_td"><%= link_to "商品価格を投稿する", new_store_price_path(store_google_place_id: @store.google_place_id, product_id: product.id) %></td>
             </tr>
             <% end %>
           </tbody>

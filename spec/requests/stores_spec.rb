@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Stores", type: :request do
+  let(:user) { create(:user) }
   let(:store) { create(:store) }
   let(:mock_store) do
     OpenStruct.new(place_id: store.google_place_id, name: "Mock Store", formatted_address: "123 Tokyo St",
@@ -9,13 +10,16 @@ RSpec.describe "Stores", type: :request do
   let!(:categories) do
     (1..8).map { |i| create(:category, id: i, name: "Category #{i}") }
   end
-
   let!(:products) do
     (1..8).map { |i| create(:product, id: i, name: "Product #{i}") }
+  end
+  let!(:evaluation) do
+    create(:evaluation, store: store, google_place_id: store.google_place_id)
   end
 
   describe "GET /show" do
     before do
+      sign_in user
       allow(Client).to receive(:spot).and_return(mock_store)
       get store_path(google_place_id: store.google_place_id)
     end
@@ -58,6 +62,21 @@ RSpec.describe "Stores", type: :request do
 
     it "category_id8の商品が取得できていること" do
       expect(response.body).to include("Product 8")
+    end
+
+    it "評価が存在する場合、平均評価が取得できていること" do
+      expect(response.body).to include("平均")
+    end
+
+    context "評価が存在しない場合" do
+      before do
+        evaluation.destroy
+        get store_path(google_place_id: store.google_place_id)
+      end
+
+      it "評価が存在しない場合、'評価なし'と表示されること" do
+        expect(response.body).to include("評価なし")
+      end
     end
   end
 end
