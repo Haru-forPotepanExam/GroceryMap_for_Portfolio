@@ -15,6 +15,16 @@
           <th class="common_th">メールアドレス：</th>
           <td class="common_td"><%= @user.email %></td>
         </tr>
+        <tr>
+          <th class="common_th">プロフィール画像：</th>
+          <td class="common_td">
+            <% if @user.avatar.attached? %>
+              <%= image_tag @user.avatar, class: 'avatar', alt: 'プロフィール画像', size: '200x200' %>
+            <% else %>
+              <%= image_tag 'guest_profile.jpg', class: 'avatar', alt: 'デフォルトプロフィール画像', size: '200x200' %> 
+            <% end %>
+          </td>
+        </tr>
       </table>
     </div>
   </div>

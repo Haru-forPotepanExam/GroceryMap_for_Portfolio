@@ -9,7 +9,7 @@ RSpec.describe 'Users::Resistrations::News', type: :system do
     fill_in 'ユーザーネーム', with: 'Test'
     fill_in 'Eメール', with: 'test@gmail.com'
     fill_in 'パスワード', with: 'password'
-    fill_in 'パスワード（確認用）', with: 'password'
+    fill_in '確認用パスワード', with: 'password'
     click_button 'アカウント登録'
 
     expect(page).to have_current_path(root_path)

@@ -13,5 +13,15 @@ FactoryBot.define do
       name { 'ゲスト' }
       password { SecureRandom.urlsafe_base64 }
     end
+
+    factory :user_with_avatar do
+      after(:build) do |user|
+        user.avatar.attach(
+          io: File.open(Rails.root.join('spec/fixtures/files/test_avatar.jpg')),
+          filename: 'test_avatar.jpg',
+          content_type: 'image/jpg'
+        )
+      end
+    end
   end
 end

@@ -16,18 +16,27 @@
         </div>
 
         <div class="field">
+          <%= f.label :avatar, "プロフィール画像" %><br />
+          <label class="avatar_form">
+            <span class="user_btn">画像を選択</span>
+            <%= f.file_field :avatar, class:"hidden" %>
+          </label>
+        </div>
+
+        <div class="field">
           <%= f.label :email %><br />
           <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
+          <><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
         <% end %>
 
         <div class="field">
-          <div><%= f.label :password %> <i><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></i></div><br />
+          <div><%= f.label :password %> <i class="info-text"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></i></div><br />
           <%= f.password_field :password, autocomplete: "new-password" %>
         </div>
+        <i class="info-text-for-media"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></i>
 
         <div class="field">
           <%= f.label :password_confirmation %><br />
@@ -35,20 +44,19 @@
         </div>
 
         <div class="field">
-          <%= f.label :current_password %>
-          <i class="info-text">(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br>
+          <%= f.label :current_password %><br>
           <%= f.password_field :current_password, autocomplete: "current-password" %>
         </div>
-        <i class="info-text_for_media">(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i>
+        <i class="info-text-for-common">(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i>
 
         <div class="actions">
-          <%= f.submit t('.update') %>
+          <%= f.submit t('.update'), class:"user_btn"  %>
         </div>
       <% end %>
 
       <h3><%= t('.cancel_my_account') %></h3>
 
-      <div class="cancel_account"><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %></div>
+      <div class="cancel_account"><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete, class:"user_btn" %></div>
 
       <%= link_to t('devise.shared.links.back'), :back, class:"back_link" %>
     </div>

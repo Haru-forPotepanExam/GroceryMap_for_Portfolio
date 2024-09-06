@@ -36,7 +36,7 @@ RSpec.describe 'Users::Resistrations::Edits', type: :system do
 
   it 'パスワードと確認用パスワードを入力し更新をクリックした際に、パスワードが更新されること' do
     fill_in 'パスワード', with: 'newpassword123'
-    fill_in 'パスワード（確認用）', with: 'newpassword123'
+    fill_in '確認用パスワード', with: 'newpassword123'
     fill_in '現在のパスワード', with: 'password'
     click_button '更新'
 

@@ -56,14 +56,21 @@
   justify-content: space-between;
 }
 
-.info-text_for_media {
+.info-text-for-media {
   display: none;
+}
+
+.info-text-for-common {
+  font-size: small;
 }
 
 .signin_link a {
   text-decoration: none;
 }
 
+.info-text {
+  font-size: small;
+}
 @media (max-width: 430px) {
   .profile_container {
     margin: 10px 10px;
@@ -86,7 +93,7 @@
     display: none;
   }
 
-  .info-text_for_media {
+  .info-text-for-media {
     font-size: small;
     display: block;
   }
@@ -94,4 +101,20 @@
   .signin_link {
     font-size: 10px;
   }
+}
+
+.hidden {
+  display: none;
+}
+
+.user_btn {
+  border-radius: 9999px;
+  background-color: #4ca748;
+  border: 2px white;
+  color: white;
+  padding: 5px 10px;
+}
+
+.field {
+  margin-top: 15px;
 }

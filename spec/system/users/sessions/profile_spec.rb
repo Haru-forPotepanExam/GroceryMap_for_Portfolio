@@ -2,6 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Users::Sessions::Profiles", type: :system do
   let(:user) { create(:user) }
+  let(:user_with_avatar) { create(:user_with_avatar) }
+
   before do
     sign_in user
     visit profile_path(user)
@@ -23,5 +25,20 @@ RSpec.describe "Users::Sessions::Profiles", type: :system do
 
   it "メールアドレスが表示されること" do
     expect(page).to have_content(user.email)
+  end
+
+  it "プロフィール画像にデフォルトの画像が表示されること" do
+    expect(page).to have_selector("img.avatar[alt='デフォルトプロフィール画像']")
+  end
+
+  context "プロフィール画像を登録している場合" do
+    before do
+      sign_in user_with_avatar
+      visit profile_path
+    end
+
+    it "プロフィール画像が表示されること" do
+      expect(page).to have_selector("img.avatar[alt='プロフィール画像']")
+    end
   end
 end
