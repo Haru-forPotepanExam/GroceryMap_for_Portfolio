@@ -2,7 +2,7 @@ class Evaluation < ApplicationRecord
   belongs_to :user
   belongs_to :store, primary_key: 'google_place_id', foreign_key: 'google_place_id'
 
-  PRICE_VALUE = ["安価", "やや安価", "平均", "やや高価", "高価"]
+  PRICE_VALUE = ["安価", "やや安価", "平均", "やや高価", "高価"].freeze
 
   validates :price_range, presence: true, inclusion: { in: PRICE_VALUE }
 
