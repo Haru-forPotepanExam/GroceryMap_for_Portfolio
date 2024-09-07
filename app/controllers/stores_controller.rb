@@ -5,7 +5,9 @@ class StoresController < ApplicationController
     @store_name = @place.name
     @store = Store.find_or_initialize_by(google_place_id: params[:google_place_id])
 
-    @current_evaluation = current_user.evaluations.find_by(google_place_id: @store.google_place_id)
+    if user_signed_in?
+      @current_evaluation = current_user.evaluations.find_by(google_place_id: @store.google_place_id)
+    end
 
     if @store.evaluations.present?
       @store_average_evaluation = Evaluation.average_evaluation_label(@google_place_id)
