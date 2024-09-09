@@ -24,7 +24,7 @@ function initMap() {
     {
       componentRestrictions: { country: "jp" },
       fields: ["place_id", "geometry", "name"],
-      types: ['supermarket', 'subway_station', 'train_station', 'bus_station'],
+      types: ['supermarket', 'transit_station'],
     },
   );
   places = new google.maps.places.PlacesService(map);
@@ -72,7 +72,7 @@ function onPlaceChanged() {
     map.setZoom(15);
     search();
   } else {
-    document.getElementById("autocomplete").placeholder = "例）東京駅　XXスーパー";
+    document.getElementById("autocomplete").placeholder = "駅名や店舗名で検索";
   }
 }
 
