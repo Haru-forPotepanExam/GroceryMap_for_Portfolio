@@ -24,3 +24,15 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media (max-width: 430px) {
+  .evaluated {
+    font-size: 15px;
+    margin: 2px;
+  }
+  
+  .evaluate {
+    font-size: 15px;
+    margin: 2px;
+  }
+}
