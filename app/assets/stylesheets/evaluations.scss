@@ -27,6 +27,7 @@
 
 @media (max-width: 430px) {
   .evaluated {
+    border: 1px solid #3b5b2e;
     font-size: 15px;
     margin: 2px;
   }
@@ -34,5 +35,6 @@
   .evaluate {
     font-size: 15px;
     margin: 2px;
+    border: 1px solid #689931;
   }
 }
