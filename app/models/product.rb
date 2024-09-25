@@ -6,10 +6,10 @@ class Product < ApplicationRecord
   validates :name, uniqueness: true, presence: true
 
   def self.ransackable_attributes(options = {})
-    %w(category_id created_at id name updated_at)
+    %w(name)
   end
 
   def self.ransackable_associations(options = {})
-    ["category", "prices"]
+    ["prices"]
   end
 end

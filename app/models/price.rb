@@ -52,7 +52,7 @@ class Price < ApplicationRecord
   end
 
   def self.ransackable_attributes(options = {})
-    %w(created_at google_place_id id memo price_value product_id quantity updated_at user_id weight)
+    %w(memo price_value)
   end
 
   def self.ransackable_associations(options = {})

@@ -16,7 +16,7 @@ RSpec.describe "Home", type: :system do
   end
 
   it "検索バーが表示されること" do
-    expect(page).to have_field("autocomplete", placeholder: "例）東京駅　XXスーパー")
+    expect(page).to have_field("autocomplete", placeholder: "駅名や店舗名で検索")
     expect(page).to have_css("#map")
   end
 end
